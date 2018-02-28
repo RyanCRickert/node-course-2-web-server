@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+const port = process.env.PORT || 3000;
 
 var app = express();
 
@@ -19,12 +20,12 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use((req, res, next) => {
-	res.render('maintenance.hbs', {
-		pageTitle: "We Will Be Right Back",
-		welcomeMessage: "The site is currently under maintenance and should hopefully be back soon."
-	});
-})
+// app.use((req, res, next) => {
+// 	res.render('maintenance.hbs', {
+// 		pageTitle: "We Will Be Right Back",
+// 		welcomeMessage: "The site is currently under maintenance and should hopefully be back soon."
+// 	});
+// })
 
 app.use(express.static(__dirname + '/public'));
 
@@ -54,6 +55,6 @@ app.get('/bad', (req, res) => {
 		errorMessage: '404 page not found!'
 	})
 })
-app.listen(3000, () => {
-	console.log('Server is up on port 3000');
+app.listen(port, () => {
+	console.log(`Server is up on port ${port}`);
 });
